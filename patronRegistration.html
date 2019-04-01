@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Patron Registration</title>
+</head>
+
+<body>
+  <h1>Patron Registration</h1>
+
+<form onclick="sendForm()" action="" method="POST">
+ First Name: <input type="text" method="POST" name="firstName" id="firstName" action="datapage.php">
+ Last Name: <input type="text" method="POST" name="lastName" id="lastName" action="datapage.php">
+ <input type="hidden" name="eventName" id="eventName" value="Name of event">
+ <input type="submit" name="button" value="SUBMIT">
+ </form>
+
+ <h2>
+    The Clubhou.se would like to thank you for attending the event. <br>
+    We hope you had fun, and look forward to seeing you at the next one.
+    <br>
+    <br>
+    We truly appreciate your support. 
+    <br>
+    <br>
+    Thank you!
+    <br>
+    <br>
+    The Clubhou.se
+    <h2>
+      
+    <image src="https://lh3.googleusercontent.com/89I3jTCnciv_moEjmdORP3rFPBuqlOrImRUj1U6lU4PAWFVY8-LXqlrvoJTlqZQH-on3=w720-h310"></image>
+    <br>
+    <br>
+    <image src="http://hackaugusta.org/i/HackAugusta_logo.png"></image>
+    <br>
+
+    <script>
+      "use strict";
+        
+    function sendForm() {
+      let webEvent = window.location.href; 
+      webEvent = webEvent.split("="); 
+      webEvent = webEvent[1];
+      let firstName = document.getElementById("firstName").value;
+      let lastName = document.getElementById("lastName").value;
+      let eventName = webEvent;
+
+      let formData = new FormData();
+      formData.append('firstName', firstName);
+      formData.append('lastName', lastName);
+      formData.append('eventName', eventName);
+      
+      let xhttp = new XMLHttpRequest();
+      xhttp.open('POST', 'dataPage.php');
+      xhttp.send(formData);
+
+    }
+  </script>
+</body>
+
+<style>
+  h1 {
+    font-size: 80px;
+    text-align: center;
+    font-style: serif;
+    text-shadow: 2px 2px 8px red;
+    text-decoration-line: underline;
+  }
+
+  input[type=SUBMIT] {
+    text-align: center;
+    font-size: 30px;
+    color: red;
+    background-color: black;
+    border: black;
+    border-radius: 8px;
+  }
+
+  form {
+    text-align: center;
+    font-size: 40px;
+    font-style: serif;
+    font-weight: solid;
+    text-shadow: 2px 2px 8px red;
+  }
+
+  body {
+    background-color: grey;
+  }
+</style>
+
+
+</html>

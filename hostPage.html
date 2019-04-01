@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        h1 {
+         font-size: 80px;
+         text-align: center;
+         font-style: serif;
+         text-shadow: 2px 2px 8px blue;
+         text-decoration-line: underline;
+      }
+    h2 {
+         text-align: center;
+         font-style: serif;
+         margin-top: 60px;
+         font-size: 30px;
+         padding-top: 90px;
+         text-shadow: 2px 2px 20px black;
+      }
+      input[type=SUBMIT] {
+         text-align: center;
+         font-size: 30px;
+         color: azure;
+         background-color: black;
+         border: black;
+         border-radius: 8px;
+      }
+     .slap {
+         font-size: 40px;
+         font-style: serif;
+         font-weight: solid;
+         text-shadow: 2px 2px 8px blue;
+      }
+      form {
+         text-align: center;
+         font-size: 40px;
+         font-style: serif;
+         font-weight: solid;
+         text-shadow: 2px 2px 8px blue;
+      }
+      body {
+         background-color: azure;
+      }
+   </style>
+</head>
+
+<body>
+    <!-- // FRONT END TEAM :   please note I need a navigation to
+    <a href="eventCreate.php">Add a new event</a> -->
+
+    <h1>The Augusta Clubhou.se Event Page</h1>
+    <form>Select your event:
+        <!-- /insert option value="" to instruct user on the drop-down box functionality/ -->
+        <select name="Events" id="Events">
+        <option value = ''>--Choose your event--</option>
+            
+        </select>
+        <p id="msg"></p>
+
+        <input type="button" id="patronRegistration" onclick="toPatron()" value="Patron Registration"><br>
+        <input type="button" id="eventReport" value="Event Report" onclick="toEvent()" >
+    </form>
+
+    <script>
+        "use strict"
+        function toPatron() {
+            let event = document.getElementById("Events").value; 
+            console.log(event);
+            window.location.href = 'patronRegistration.html?Events='+event;
+            // window.open('patronRegistration.html?Events='+event);
+        }
+        function toEvent() {
+            let event = document.getElementById("Events").value; 
+            console.log(event);
+            window.location.href = 'eventReport.html?Events='+event;
+            // window.open('patronRegistration.html?Events='+event);
+        }       
+                
+                
+        let xmlhttp = new XMLHttpRequest();
+
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let events = JSON.parse(this.responseText);
+                console.log(events);
+               
+                let ele = document.getElementById("Events");
+                for (var i =0; i < events.length; i++) {
+                // bind data to <select> element
+                ele.innerHTML = ele.innerHTML +
+                '<option value="' + events[i] + '">' +  events[i].createEvent + '</option>';
+                }
+                
+                }
+            };
+
+        xmlhttp.open("GET", "eventCreate1.php?createEvent=?", true);
+        // xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xmlhttp.send();
+       
+        
+
+    </script>
+
+
+</body>
+
+</html>
